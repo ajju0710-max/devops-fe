@@ -1,323 +1,341 @@
-# devops-fe
 # 🚀 Meetz — AI DevOps Assistant Platform
 
-Meetz is a **web-based SaaS platform** that enables teams to automate DevOps workflows using AI.
-It provides a secure, approval-driven system for building, deploying, and managing infrastructure through natural language and structured execution.
+**Tagline:** *Prompt. Execute. Deploy.*
+
+Meetz is an **AI-powered DevOps SaaS platform** that enables teams to automate infrastructure, deployments, and operational workflows using natural language—while enforcing **strict approval workflows, RBAC, and audit compliance**.
 
 ---
 
-## 🧠 Core Concept
+# 🧠 Vision
 
-> **Prompt → Approval → Execution → Observability → Learning**
-
-Meetz allows developers to interact with infrastructure using AI while enforcing **enterprise-grade guardrails, approvals, and auditability**.
+> Build an intelligent DevOps control plane where AI operates infrastructure safely, transparently, and at scale.
 
 ---
 
-## ✨ Phase-1 Features
+# ✨ Key Capabilities
 
-### 🤖 AI Assistant
+* 🤖 AI-driven DevOps automation (LLM-powered)
+* 🧾 Approval-based execution system (no direct execution)
+* 🔗 GitOps integration (Helm / Docker Compose)
+* ☁️ Real-time logs + S3 storage
+* 🔐 RBAC + Multi-tenant SaaS architecture
+* 🚨 Incident detection + AI-powered resolution
+* 🛡️ Guardrails for safe AI execution
 
-* Natural language DevOps execution
-* Log analysis (pasted / uploaded / fetched)
+---
+
+# 🏗️ System Architecture
+
+```text
+User / Logs Input
+        ↓
+AI Engine (OpenAI LLM)
+        ↓
+Structured JSON Response
+        ↓
+Change Request System
+        ↓
+Admin Approval (RBAC enforced)
+        ↓
+GitOps Engine
+   ├── Helm Chart Updates
+   ├── Docker Compose Updates
+   └── Git Commit + Push
+        ↓
+Execution Engine
+   ├── Kubernetes (kubectl)
+   └── Docker Engine
+        ↓
+Logs System
+   ├── WebSocket (Real-time)
+   └── S3 Storage (7-day retention)
+        ↓
+Incident Engine
+   ├── Error Detection
+   ├── AI Suggestions
+   └── Knowledge Base
+        ↓
+Audit System (All actions tracked)
+```
+
+---
+
+# 🧱 Tech Stack
+
+## Frontend
+
+* Next.js (App Router)
+* React
+* TypeScript
+* Tailwind CSS
+* Zustand (state management)
+
+---
+
+## Backend (Recommended)
+
+* Node.js / NestJS
+* Redis / Queue (BullMQ)
+* WebSocket server
+* Kubernetes client
+* Docker API
+
+---
+
+## AI Layer
+
+* OpenAI (LLM integration)
+* Structured JSON responses (no free-text execution)
+
+---
+
+## Storage
+
+* Amazon S3 (logs, artifacts)
+
+---
+
+## DevOps
+
+* Kubernetes
+* Docker
+* Helm
+* GitHub / GitLab
+
+---
+
+# 🧠 Core Modules
+
+---
+
+## 🤖 AI Engine
+
+* Prompt-based DevOps actions
+* Log analysis (pasted / uploaded / live)
 * Dockerfile generation
-* Suggest fixes and optimizations
-* Converts actions into **Change Requests**
+* Structured output:
+
+```json
+{
+  "intent": "DEPLOY",
+  "commands": ["kubectl apply -f deployment.yaml"],
+  "riskLevel": "HIGH",
+  "requiresApproval": true
+}
+```
 
 ---
 
-### ⚙️ Build & Deploy
+## 🧾 Change Request System (Core Engine)
 
-* Build Docker images
-* Push to registries
-* Manage version tags (Patch / Release)
-* Kubernetes & Docker support
+Every action becomes a **Change Request**:
 
----
+* No direct execution
+* Fully auditable
+* Approval lifecycle:
 
-### 🔐 Image Security
-
-* Vulnerability scanning
-* Severity classification (Critical / High / Medium)
-* AI-based remediation suggestions
+```text
+PENDING → APPROVED → EXECUTED
+```
 
 ---
 
-### 📜 Logs & Insights
+## 🔗 GitOps Engine
 
-* Real-time log streaming (WebSocket-ready)
-* 7-day log retention
+* Modify Helm charts / docker-compose
+* Commit with user identity
+* Push to GitHub / GitLab
+* Linked to Change Request
+
+---
+
+## ⚙️ Execution Engine
+
+* Executes approved requests
+* Supports:
+
+  * Kubernetes
+  * Docker
+  * Shell commands
+* Streams logs in real time
+
+---
+
+## 📜 Logs System
+
+* WebSocket-based live logs
+* Stored in S3 (7-day retention)
 * AI-assisted log analysis
 
 ---
 
-### 🐳 Dockerfile AI
+## 🚨 Incidents & Knowledge Base
 
-* Generate Dockerfiles from app context
-* Edit and version control
-
----
-
-### 🔗 Integrations
-
-* Git: GitHub / GitLab
-* Registry: DockerHub / JFrog / Harbor
-* Deployment: Kubernetes / Docker
-* Notifications: Slack / Email
-* Issue Tracking: Jira
+* Auto-detect failures
+* AI suggests solutions
+* Store solutions for reuse
+* Tagged and searchable
 
 ---
 
-### 🧾 Change Requests (Core Engine)
+## 🔐 RBAC System
 
-* Every action becomes an approval request
-* Tracks:
+Roles:
 
-  * Commands
-  * File changes
-  * Execution logs
-* Status lifecycle:
-
-  * `PENDING → APPROVED → EXECUTED`
+| Role      | Capabilities                           |
+| --------- | -------------------------------------- |
+| Admin     | Full access (approve, deploy, execute) |
+| Developer | Create requests, modify configs        |
 
 ---
 
-### 🛡️ Policies & Guardrails
+## 🏢 Multi-Tenant Architecture
+
+* Organization-based isolation
+* Each request scoped to:
+
+  * `organizationId`
+  * `userId`
+* SaaS-ready (billing, plans)
+
+---
+
+## 🧾 Audit System
+
+Every action is tracked:
+
+* Change request creation
+* Approvals
+* Git commits
+* Deployments
+* Command execution
+
+---
+
+## 🛡️ Guardrails
 
 * Command whitelisting
 * Execution restrictions
 * AI safety controls
+* Mandatory approval before execution
 
 ---
 
-### 🚨 Incidents & Knowledge Base
+# 🔄 End-to-End Flow
 
-* Auto-create incidents on failure
-* AI suggests solutions
-* Store solutions for future reuse
-* Tagged by users
-
----
-
-### 💻 Command Console
-
-* Execute shell commands (approval required)
-* AI-assisted command suggestions
-
----
-
-## 🔐 Role-Based Access (RBAC)
-
-| Capability       | Admin             | Developer    |
-| ---------------- | ----------------- | ------------ |
-| Deploy           | ✅                 | ❌            |
-| Approve Requests | ✅                 | ❌            |
-| Modify Configs   | ✅                 | ✅            |
-| Execute Commands | ✅ (with approval) | Request-only |
-| View Logs        | ✅                 | ✅            |
-
----
-
-## 🏗️ Architecture Overview
-
-### Frontend
-
-* Next.js (App Router)
-* TypeScript
-* Tailwind CSS
-* Zustand (state management)
-* Axios (API layer)
-
----
-
-### Core Design Principles
-
-* ❌ No hardcoded configs
-* ✅ Centralized configuration
-* ✅ Feature-based modular architecture
-* ✅ Approval-first execution model
-* ✅ GitOps-friendly workflows
-
----
-
-## 📁 Project Structure
-
-```
-src/
-├── app/                  # Routing (Next.js)
-├── components/           # UI + Layout
-├── features/             # Domain modules
-├── config/               # Centralized configs
-├── services/             # API layer
-├── store/                # Global state
-├── hooks/                # Custom hooks
-├── utils/                # Helpers
-├── types/                # Type definitions
-```
-
----
-
-## ⚙️ Configuration (No Hardcoding)
-
-All configs are managed via:
-
-* `config/env.ts`
-* `config/navigation.config.ts`
-* `config/integrations.config.ts`
-
-### Example:
-
-```
-NEXT_PUBLIC_API_URL=https://api.meetz.co.in
-```
-
----
-
-## 🔄 Execution Flow
-
-```
-User Prompt / Action
+```text
+User Prompt / Logs
         ↓
-AI Processing
+AI Engine (LLM)
+        ↓
+Structured Output
         ↓
 Change Request Created
         ↓
 Admin Approval
         ↓
-Execution (K8s / Docker / Git)
+GitOps Changes Applied
+        ↓
+Execution Triggered
         ↓
 Logs Streamed + Stored
         ↓
-Incident Created (if failure)
+Failure? → Incident Created
         ↓
-AI Suggestion + Knowledge Base Update
+AI Suggestion → Knowledge Base
 ```
 
 ---
 
-## 🔗 GitOps Integration
+# 📁 Project Structure
 
-* All changes are committed to Git
-* Tracks:
-
-  * User identity
-  * File modifications
-* Supports:
-
-  * Helm charts
-  * docker-compose
-
----
-
-## 📡 Logs System
-
-* WebSocket-based streaming (planned)
-* Sources:
-
-  * Kubernetes
-  * Docker
-  * Build pipelines
-* Retention: **7 days**
-
----
-
-## 🚀 Getting Started
-
-### 1. Clone Repository
-
+```bash
+src/
+├── app/                    # Next.js routes
+├── components/            # UI components
+├── features/              # Domain modules
+│   ├── ai-engine/
+│   ├── change-requests/
+│   ├── execution/
+│   ├── gitops/
+│   ├── logs/
+│   ├── incidents/
+│   └── guardrails/
+├── config/                # Central configs
+├── services/              # API layer
+├── store/                 # Zustand stores
+├── hooks/                 # Custom hooks
+├── utils/                 # Helpers
+└── types/                 # Type definitions
 ```
+
+---
+
+# ⚙️ Configuration
+
+All configurations are centralized (no hardcoding):
+
+* `config/env.ts`
+* `config/navigation.config.ts`
+* `config/integrations.config.ts`
+* `config/ai.config.ts`
+* `config/storage.config.ts`
+
+---
+
+# 🔐 Security Model
+
+* Approval required for all executions
+* RBAC enforced at UI + backend
+* Tenant isolation
+* Audit logging for compliance
+* AI cannot execute directly
+
+---
+
+# 🚀 Getting Started
+
+```bash
 git clone https://github.com/your-org/meetz.git
 cd meetz
-```
-
----
-
-### 2. Install Dependencies
-
-```
 npm install
-```
-
----
-
-### 3. Setup Environment
-
-Create `.env.local`:
-
-```
-NEXT_PUBLIC_API_URL=http://localhost:3000
-```
-
----
-
-### 4. Run Development Server
-
-```
 npm run dev
 ```
 
 ---
 
-### 5. Open Application
+# 🔮 Future Roadmap
 
-```
-http://localhost:3000
-```
-
----
-
-## 🎨 UI/UX Principles
-
-* Dark/Light theme (system default)
-* AI-first interface
-* Approval visibility
-* Real-time feedback
-* Minimal friction workflows
-
----
-
-## 🔮 Future Roadmap
-
-* Multi-tenant SaaS (organizations)
-* Billing & subscription (Stripe)
-* Advanced RBAC
+* Multi-cluster Kubernetes support
+* Advanced AI (fine-tuned models)
 * Observability dashboards
-* AI model fine-tuning (incident learning)
-* Kubernetes multi-cluster support
+* Billing (Stripe integration)
+* Enterprise SSO (OAuth / SAML)
+* Plugin marketplace
 
 ---
 
-## ⚠️ Security Considerations
+# 💡 Inspiration
 
-* All executions require approval
-* Guardrails enforced on AI actions
-* Role-based restrictions
-* Audit logs for all operations
+Meetz combines concepts from:
 
----
-
-## 🤝 Contribution
-
-Currently private development.
-Contribution guidelines will be added in future.
+* GitOps (ArgoCD)
+* CI/CD platforms
+* AI copilots
+* DevOps automation tools
 
 ---
 
-## 📌 License
+# 📌 License
 
-Proprietary (Meetz Platform)
-
----
-
-## 💡 Vision
-
-> Build an intelligent DevOps platform where AI doesn’t just assist—but operates safely, transparently, and at scale.
+Proprietary — Meetz Platform
 
 ---
 
-## 🔗 Branding
+# 🤝 Final Note
 
-**Product Name:** Meetz
-**Tagline:** *Prompt. Execute. Deploy.*
+Meetz is not just a DevOps tool—it’s a **next-generation AI-driven infrastructure platform** designed for modern engineering teams.
+
+> **Prompt your infrastructure. Approve with confidence. Deploy at scale.**
 
 ---
